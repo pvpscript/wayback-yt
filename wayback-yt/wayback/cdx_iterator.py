@@ -1,10 +1,14 @@
 from typing import List
 
-class CdxIter:
+class CdxIterator:
     def __init__(self, cdx_data: List[List[str]], *, delimiter: str = '|'):
         self._cdx_data = cdx_data
         self._delimiter = delimiter
         self._index = 0
+
+    @property
+    def iterator(self):
+        return self._iterator
 
     def __iter__(self):
         self._index = 0
