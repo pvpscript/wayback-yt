@@ -2,7 +2,7 @@ import asyncio
 import aiohttp
 
 from typing import List
-from collections.abc import Iterator
+from collections.abc import Awaitable 
 
 class CDXFetcher:
     def __init__(self, url_list: List[str]):
@@ -19,7 +19,14 @@ class CDXFetcher:
     async def __aexit__(self, *args):
         await self._session.close()
 
-    async def fetch(self) -> Iterator[List[List[str]]]:
-        for url in self._url_list:
-            async with self._session.get(self._format(url)) as r:
-                yield await r.json()
+    async def _get_cdx_data(self, url) -> Awaitable[List[List[str]]]:
+        async with self._session.get(url) as r:
+            return await r.json()
+
+    async def fetch(self) -> List[List[str]]:
+        tasks = []
+        for raw_url in self._url_list:
+            url = self._format(raw_url)
+            tasks.append(asyncio.ensure_future(self._get_cdx_data(url)))
+
+        return await asyncio.gather(*tasks)
