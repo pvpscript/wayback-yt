@@ -4,7 +4,7 @@ import aiohttp
 from typing import List
 from collections.abc import Iterator
 
-class CdxFetcher:
+class CDXFetcher:
     def __init__(self, url_list: List[str]):
         self._url_list = url_list
 

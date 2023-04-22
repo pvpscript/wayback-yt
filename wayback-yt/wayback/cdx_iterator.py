@@ -1,6 +1,6 @@
 from typing import List
 
-class CdxIterator:
+class CDXIterator:
     def __init__(self, cdx_data: List[List[str]], *, delimiter: str = '|'):
         self._cdx_data = cdx_data
         self._delimiter = delimiter
