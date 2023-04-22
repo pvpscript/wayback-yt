@@ -15,7 +15,7 @@ class CDXIterator:
 
         return self
 
-    def __next__(self) -> List[str]:
+    def __next__(self) -> str:
         try:
             data = self._cdx_data[self._index]
             self._index += 1
