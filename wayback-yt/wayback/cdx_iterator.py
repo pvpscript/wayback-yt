@@ -7,8 +7,8 @@ class CDXIterator:
         self._index = 0
 
     @property
-    def iterator(self):
-        return self._iterator
+    def delimiter(self):
+        return self._delimiter
 
     def __iter__(self):
         self._index = 0
